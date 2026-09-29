@@ -1,0 +1,436 @@
+:root{
+  --paper:#EFF1EC;
+  --paper-deep:#E6E9E2;
+  --ink:#22322D;
+  --ink-soft:#5B685F;
+  --line:#D3DBD2;
+  --card:#FFFFFF;
+  --pine:#2F6F5E;
+  --pine-dark:#245A4C;
+  --gold:#B98B2A;
+  --gold-soft:#F1E4C4;
+  --danger:#A63A2E;
+  --radius:6px;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+button{font-family:inherit;}
+::selection{background:var(--gold-soft);}
+
+/* ---------- Header ---------- */
+header{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  padding:12px 16px;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  flex-shrink:0;
+}
+/* Everything in the header holds its size and stays on the top row by
+   default — only the search box and the "Highlight team" dropdown (see
+   .search-wrap and #overlayTeamSelect below) give up width first, so the
+   action buttons on the right never get pushed to a second line before
+   those two have already shrunk to their floor. */
+header > *{flex-shrink:0;}
+.brand{display:flex;align-items:baseline;gap:6px;flex-shrink:0;}
+.brand h1{
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight:600;
+  font-size:18px;
+  margin:0;
+  letter-spacing:-0.01em;
+  white-space:nowrap;
+}
+.headcount{
+  font-size:12px;
+  color:var(--ink-soft);
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:3px 8px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.view-tabs{display:flex; gap:2px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:2px;}
+.view-tab{padding:6px 10px; border:none; background:transparent; border-radius:4px; font-size:13px; font-weight:500; cursor:pointer; color:var(--ink-soft); white-space:nowrap;}
+.view-tab.active{background:var(--pine); color:#fff;}
+.spacer{flex:1 1 0; flex-shrink:1; min-width:0;}
+.search-wrap{position:relative; flex:1 1 190px; flex-shrink:1; min-width:90px; max-width:190px;}
+.search-wrap input{
+  width:100%;
+  padding:8px 12px 8px 32px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--card);
+  font-size:14px;
+  color:var(--ink);
+  box-sizing:border-box;
+}
+.search-wrap input:focus{outline:2px solid var(--pine); outline-offset:1px;}
+.search-wrap svg{position:absolute; left:9px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-soft);}
+select{
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--card);
+  font-size:13.5px;
+  color:var(--ink);
+  font-family:inherit;
+}
+select:focus{outline:2px solid var(--pine); outline-offset:1px;}
+#overlayTeamSelect{flex:0 1 auto; min-width:70px; max-width:160px;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 11px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  font-size:13.5px;
+  font-weight:500;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.btn:hover{border-color:var(--ink-soft);}
+.btn:focus-visible{outline:2px solid var(--pine); outline-offset:1px;}
+.btn-primary{background:var(--pine); border-color:var(--pine); color:#fff;}
+.btn-primary:hover{background:var(--pine-dark); border-color:var(--pine-dark);}
+.btn-save{background:var(--gold); border-color:var(--gold); color:#fff;}
+.btn-save:hover{background:#A47A22; border-color:#A47A22;}
+.btn-quiet{border-color:transparent; background:transparent;}
+.btn-quiet:hover{background:var(--paper-deep);}
+.zoom-group{display:flex; align-items:center; gap:2px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:2px;}
+.zoom-group button{width:28px; height:28px; border:none; background:transparent; border-radius:4px; cursor:pointer; font-size:15px; color:var(--ink);}
+.zoom-group button:hover{background:var(--paper-deep);}
+.zoom-label{font-size:12px; color:var(--ink-soft); padding:0 6px; min-width:38px; text-align:center;}
+
+/* ---------- Legend ---------- */
+.legend{
+  display:flex; gap:10px 8px; flex-wrap:wrap; align-items:center;
+  padding:14px 20px 16px 20px;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  flex-shrink:0;
+}
+.legend-chip{
+  display:flex; align-items:center; gap:6px;
+  font-size:12.5px; color:var(--ink-soft);
+  padding:4px 9px; border-radius:999px; border:1px solid var(--line);
+  background:var(--card); cursor:pointer;
+}
+.legend-chip.dim{opacity:0.4;}
+.legend-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0;}
+
+/* ---------- Tree canvas ---------- */
+.viewport{
+  flex:1;
+  position:relative;
+  overflow:auto;
+  min-height:0;
+}
+.stage-spacer{position:relative;}
+.stage{
+  position:absolute; top:0; left:0;
+  transform-origin: top left;
+}
+.card{
+  position:absolute;
+  width:208px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  display:flex;
+  cursor:pointer;
+  transition:box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
+}
+.card:hover{border-color:var(--ink-soft);}
+.card:focus-visible{outline:2px solid var(--pine); outline-offset:2px;}
+.card.match{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold-soft);}
+.card.dim{opacity:0.3;}
+.card.vacant{border-style:dashed; border-color:#B7C0B9; background:#F4F5F2;}
+.card.vacant .card-name{color:var(--ink-soft); font-style:italic;}
+.card-accent{width:4px; border-radius:6px 0 0 6px; flex-shrink:0;}
+.card-body{padding:10px 12px; min-width:0; flex:1;}
+.card-name{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight:600; font-size:15px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.card-title{font-size:12.5px; color:var(--ink-soft); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.card-dept{font-size:11px; margin-top:5px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.vacant-badge{display:inline-block; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; color:#8A9188; background:#E4E7E1; border-radius:999px; padding:1px 7px; margin-top:4px;}
+.quick-add{
+  position:absolute; top:-9px; right:-9px;
+  width:22px; height:22px; border-radius:50%;
+  background:var(--pine); color:#fff; border:2px solid var(--paper);
+  font-size:14px; line-height:1; cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  padding:0;
+}
+.card:hover .quick-add{display:flex;}
+.collapse-toggle{
+  position:absolute;
+  width:22px; height:22px;
+  border-radius:50%;
+  background:var(--card);
+  border:1px solid var(--pine);
+  color:var(--pine);
+  font-size:11px;
+  font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  left:50%;
+  transform:translateX(-50%);
+}
+.collapse-toggle:hover{background:var(--pine); color:#fff;}
+
+/* ---------- Connectors (reporting lines) ---------- */
+svg.connectors{position:absolute; top:0; left:0; overflow:visible;}
+.connector-line{
+  fill:none;
+  stroke:#8FA396;
+  stroke-width:2.25;
+  transition:stroke .15s ease, stroke-width .15s ease, opacity .15s ease;
+}
+.connector-line.active{stroke:var(--pine); stroke-width:3;}
+.connector-line.faded{opacity:0.22;}
+.connector-line.straight{stroke-width:3;} /* a single-file rank chain reads as one bold spine, not a series of thin segments */
+.connector-line.straight.active{stroke-width:3.5;}
+.connector-dot{
+  fill:#8FA396;
+  transition:fill .15s ease, opacity .15s ease;
+}
+.connector-dot.active{fill:var(--pine);}
+.connector-dot.faded{opacity:0.22;}
+.grid-block-box{fill:rgba(47,111,94,0.05); stroke:#8FA396; stroke-width:1.5; stroke-dasharray:4,3; transition:opacity .15s ease, stroke .15s ease, stroke-width .15s ease;}
+.grid-block-box.active{stroke:var(--pine); stroke-width:2;}
+.grid-block-box.faded{opacity:0.3;}
+.overlay-arc{opacity:0.85;}
+.overlay-note{font-size:12px; color:var(--danger);}
+
+/* ---------- Empty state ---------- */
+.empty-state{
+  position:absolute; top:0; left:0; right:0; bottom:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px; text-align:center; padding:20px;
+}
+.empty-state h2{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:600; margin:0;}
+.empty-state p{color:var(--ink-soft); max-width:360px; margin:0; font-size:14.5px; line-height:1.5;}
+.empty-actions{display:flex; gap:10px;}
+
+/* ---------- Matrix ---------- */
+.matrix-wrap{
+  flex:1;
+  overflow:hidden;
+  padding:20px;
+  display:none;
+  min-height:0;
+}
+/* The actual scrolling happens in this inner element, which has no padding
+   of its own. That way the sticky thead's "top:0" always means the true top
+   of the scrollport, with no padding gap for it to slide through first —
+   that gap was the window in which a stale/ghost frame of a row could
+   flash above the header while scrolling. The visual inset from
+   matrix-wrap's own padding is unaffected. */
+.matrix-scroll{width:100%; height:100%; overflow:auto;}
+.matrix-table{border-collapse:separate; border-spacing:0; background:var(--card); min-width:100%;}
+.matrix-table th, .matrix-table td{padding:10px 14px; border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:13px; text-align:left; white-space:nowrap;}
+.matrix-table thead th{background:var(--paper-deep); position:sticky; top:0; z-index:2; font-weight:600;}
+.th-sub{font-size:11px; font-weight:400; color:var(--ink-soft); margin-top:2px;}
+.th-warn{color:var(--danger);}
+.sticky-col{position:sticky; left:0; background:var(--card); z-index:1; min-width:210px;}
+thead .sticky-col{z-index:3; background:var(--paper-deep);}
+.sticky-col-right{text-align:center; font-weight:600; min-width:80px;}
+.matrix-person{display:flex; align-items:center; gap:8px;}
+.mp-name{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight:600; font-size:13.5px;}
+.mp-title{font-size:11.5px; color:var(--ink-soft);}
+.matrix-cell{font-size:12.5px;}
+.matrix-cell.empty{color:var(--line); text-align:center;}
+.mc-alloc{font-size:11px; color:var(--ink-soft); margin-top:2px;}
+.alloc-warn{color:var(--danger);}
+.matrix-empty-wrap{height:100%; display:flex; align-items:center; justify-content:center;}
+
+/* ---------- STRONG tree (program / subproject breakdown) ---------- */
+.strong-tree-wrap{
+  flex:1;
+  overflow:hidden;
+  padding:20px;
+  display:none;
+  min-height:0;
+}
+.stx-scroll{width:100%; height:100%; overflow:auto;}
+.stx-programs{display:flex; flex-direction:column; gap:44px; min-width:min-content; margin:0 auto;}
+.stx-program{display:flex; flex-direction:column; align-items:center;}
+/* The subproject/program box itself is a lightly tinted, team-colored
+   container (same idea as a canvas section box) — the design language
+   inside it, for each person, is the same person-card look used in the
+   STMSB tree: a colored accent bar, bold name, muted role line. */
+.stx-node{
+  border:1.25px solid var(--pine);
+  border-radius:10px;
+  padding:12px;
+  width:252px;
+  flex-shrink:0;
+}
+.stx-root{width:296px;}
+.stx-node-head{display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap;}
+.stx-node-name{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.04em;}
+.stx-node-lead{font-size:11px; color:var(--ink-soft); white-space:nowrap;}
+.stx-warn{color:var(--danger);}
+.stx-node-purpose{font-size:12px; color:var(--ink-soft); margin-top:5px; line-height:1.4;}
+.stx-node-members{margin-top:10px; display:flex; flex-direction:column; gap:7px;}
+.stx-empty{font-size:12px; color:var(--ink-soft); font-style:italic;}
+.stx-card{
+  display:flex;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+}
+.stx-card-accent{width:4px; border-radius:6px 0 0 6px; flex-shrink:0;}
+.stx-card-body{padding:8px 10px; min-width:0; flex:1;}
+.stx-card-name{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight:600; font-size:14px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.stx-card-role{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+.stx-card-role strong{color:var(--ink); font-weight:700;}
+.stx-shared{font-size:10.5px; color:var(--gold); margin-top:3px;}
+.stx-trunk{width:2px; height:20px; background:#8FA396;}
+.stx-children{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:24px;
+  border-top:2px solid #8FA396;
+  padding-top:20px;
+  width:100%;
+}
+.stx-child-wrap{display:flex; flex-direction:column; align-items:center;}
+.stx-branch{width:2px; height:20px; background:#8FA396;}
+/* The program's cross-functional staff (see the "Cross-functional staff
+   box" checkbox in the person drawer) get pulled out of every team's own
+   roster and drawn as one extra box hanging off the same trunk as the
+   subprojects, undyed and dashed so it still reads as its own thing. */
+.stx-xfn{border-style:dashed; border-color:var(--ink-soft); background:var(--card);}
+.stx-xfn-name{color:var(--ink-soft);}
+
+/* ---------- Drawer ---------- */
+.overlay{
+  position:fixed; inset:0; background:rgba(34,50,45,0.25);
+  opacity:0; pointer-events:none; transition:opacity .18s ease;
+  z-index:30;
+}
+.overlay.open{opacity:1; pointer-events:auto;}
+.drawer{
+  position:fixed; top:0; right:0; bottom:0;
+  width:400px; max-width:92vw;
+  background:var(--paper);
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:transform .2s ease;
+  z-index:31;
+  display:flex; flex-direction:column;
+}
+.drawer.open{transform:translateX(0);}
+.drawer-head{
+  padding:20px; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.drawer-head h3{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:19px; font-weight:600; margin:0;}
+.drawer-close{background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-soft); padding:4px;}
+.drawer-body{padding:20px; overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:16px;}
+.field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
+.field input, .field select{
+  width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card); font-size:14px; color:var(--ink); font-family:inherit;
+}
+.field input:focus, .field select:focus{outline:2px solid var(--pine); outline-offset:1px;}
+.field-error{color:var(--danger); font-size:12.5px; margin-top:5px;}
+.dept-row{display:flex; align-items:center; gap:8px;}
+.dept-dot{width:11px; height:11px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.1);}
+.drawer-foot{padding:16px 20px; border-top:1px solid var(--line); display:flex; gap:10px; align-items:center;}
+.reports-note{font-size:12.5px; color:var(--ink-soft); background:var(--paper-deep); padding:8px 10px; border-radius:var(--radius);}
+.vacant-check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft); cursor:pointer;}
+.delete-confirm{background:#FBEDE9; border:1px solid #E3B7AA; border-radius:var(--radius); padding:12px; font-size:13.5px; display:flex; flex-direction:column; gap:10px;}
+.delete-confirm .row{display:flex; gap:8px;}
+
+/* Team membership rows in person drawer */
+.team-row{border:1px solid var(--line); border-radius:var(--radius); padding:9px 11px; margin-bottom:8px; background:var(--card);}
+.team-row.subproject{margin-left:20px; border-left:2px solid var(--line);}
+.team-sub-label{font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;}
+.team-row-check{display:flex; align-items:center; gap:8px; font-size:13.5px; cursor:pointer;}
+.team-row-fields{display:flex; gap:6px; margin-top:8px;}
+.team-row-fields input, .team-row-fields select{flex:1; padding:6px 8px; font-size:12.5px; border:1px solid var(--line); border-radius:4px; background:var(--paper); font-family:inherit;}
+.team-row-xfn{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-soft); margin-top:8px; cursor:pointer;}
+.alloc-total{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+.alloc-warn-text{color:var(--danger); font-weight:600;}
+
+/* Multi-select lead picker in team form — a project can have more than one lead */
+.lead-picker-list{max-height:170px; overflow-y:auto; border:1px solid var(--line); border-radius:var(--radius); padding:4px 10px; background:var(--card);}
+.lead-picker-row{display:flex; align-items:center; gap:8px; font-size:13px; padding:6px 0; cursor:pointer;}
+.lead-picker-row + .lead-picker-row{border-top:1px solid var(--line);}
+
+/* ---------- Modals ---------- */
+.modal{
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:600px; max-width:92vw; max-height:84vh;
+  background:var(--paper); border:1px solid var(--line); border-radius:8px;
+  z-index:31; display:none; flex-direction:column;
+}
+.modal.open{display:flex;}
+.modal-head{padding:18px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;}
+.modal-head h3{font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:19px; margin:0; font-weight:600;}
+.modal-body{padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:20px;}
+.modal-body h4{font-size:13.5px; margin:0 0 8px 0; font-weight:600;}
+.modal-body p.hint{font-size:12.5px; color:var(--ink-soft); margin:0 0 8px 0; line-height:1.5;}
+textarea{
+  width:100%; min-height:110px; padding:10px 12px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card); font-size:13px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; resize:vertical; color:var(--ink);
+}
+textarea:focus{outline:2px solid var(--pine); outline-offset:1px;}
+.import-status{font-size:12.5px; color:var(--pine-dark); display:inline-block; margin-left:8px;}
+.divider{border:none; border-top:1px solid var(--line); margin:0;}
+.team-list-row{display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line);}
+.team-list-row:last-child{border-bottom:none;}
+.team-list-row.subproject{margin-left:24px;}
+.matrix-table th.subproject-col{font-size:12px;}
+.matrix-table th .subproject-of{font-size:10.5px; font-weight:400; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.02em;}
+
+/* ---------- Section boxes (leaves grouped by shared department) ---------- */
+/* A section reads as one office — a labeled box holding a stack of people —
+   instead of an anonymous grid, so real bureaus/sections (Legal, Registration,
+   a division's own staff roster) look like the office they are. */
+.section-box{
+  stroke-width:1.25;
+  transition:opacity .15s ease, stroke-width .15s ease;
+}
+.section-box.active{stroke-width:2;}
+.section-box.faded{opacity:0.3;}
+.section-label{
+  position:absolute;
+  display:flex; align-items:center; gap:6px;
+  height:22px; padding:0 10px;
+  font-size:10.5px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+  transition:opacity .15s ease;
+}
+.section-label.faded{opacity:0.3;}
+.section-label .lbl-text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.section-label .lbl-count{font-weight:500; text-transform:none; letter-spacing:0; opacity:0.65; flex-shrink:0;}
+.section-add{
+  width:16px; height:16px; border-radius:50%; border:1px solid currentColor; background:transparent;
+  color:inherit; font-size:11px; line-height:1; cursor:pointer; flex-shrink:0; margin-left:auto;
+  display:none; align-items:center; justify-content:center; padding:0;
+}
+.section-label:hover .section-add{display:flex;}
+.card.in-section{box-shadow:0 1px 2px rgba(34,50,45,0.05);}
+
+@media (max-width: 640px){
+  .drawer{width:100vw;}
+  .search-wrap input{width:130px;}
+  header{gap:8px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .drawer, .overlay, .card, .connector-line, .connector-dot, .section-box, .section-label{transition:none;}
+}

@@ -1,0 +1,1397 @@
+{
+  "people": [
+    {
+      "id": "pmtqtfuvv02etb",
+      "name": "Director General, Office of the DG",
+      "title": "Director General",
+      "dept": "Office of the DG",
+      "managerId": null,
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtqtgor3qr0qd",
+      "name": "Deputy Director General, SST",
+      "title": "Deputy Director General",
+      "dept": "SST",
+      "managerId": "pmtqtfuvv02etb",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Executive Sponsor",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtqthkhlqifvq",
+      "name": "Director, STMSB",
+      "title": "Director IV",
+      "dept": "STMSB",
+      "managerId": "pmtqtgor3qr0qd",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Director",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtqyu5x0nb22x",
+      "name": "STMSB Staff 01",
+      "title": "SAA-5",
+      "dept": "STMSB",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtqyvcttmkex2",
+      "name": "STMSB Staff 02",
+      "title": "AA-4(D-2)",
+      "dept": "STMSB",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtqyw8noianop",
+      "name": "STMSB Staff 03",
+      "title": "AA-3",
+      "dept": "STMSB",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtqywt3j6exw3",
+      "name": "STMSB Staff 04",
+      "title": "PTO-3",
+      "dept": "STMSB",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8vxc3azp3r",
+          "role": "Lead",
+          "allocation": "80",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtqyytw8ltefp",
+      "name": "Chief, SPCSDD",
+      "title": "Chief",
+      "dept": "SPCSDD",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [],
+      "vacant": true
+    },
+    {
+      "id": "pmtqyzdzrveely",
+      "name": "Chief, SECSDD",
+      "title": "Chief",
+      "dept": "SECSDD",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "Lead",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtqz052lhkfc1",
+      "name": "Chief, SMASDD",
+      "title": "Chief",
+      "dept": "SMASDD",
+      "managerId": "pmtqthkhlqifvq",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "90",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "10",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr057q85ah96",
+      "name": "SECSDD Staff 01",
+      "title": "SvSRS",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "50",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "50",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr0svsrsvacant",
+      "name": "(Unfilled)",
+      "title": "SvSRS",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [],
+      "vacant": true
+    },
+    {
+      "id": "pmtr087i0o5ksh",
+      "name": "SECSDD Staff 02",
+      "title": "Senior SRS",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3frpwd5ndeo",
+          "role": "Lead",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr08pysl6bq4",
+      "name": "SECSDD Staff 03",
+      "title": "Senior SRS",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "Co-Lead",
+          "allocation": "80",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr09nqkvb31z",
+      "name": "SECSDD Staff 04",
+      "title": "SRS-1",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr0a15c8npdg",
+      "name": "SECSDD Staff 05",
+      "title": "SRS-2",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtr0aukjwvm7m",
+      "name": "SECSDD Staff 06",
+      "title": "SRS-1",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts66bsjexo3b",
+      "name": "SMASDD Staff 01",
+      "title": "SvSRS",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3fjrec7qxgm",
+          "role": "Lead",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts699biymigv",
+      "name": "SPCSDD Staff 01",
+      "title": "SvSRS",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "Lead",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8kwmslzeox",
+      "name": "SPCSDD Staff 02",
+      "title": "SvSRS",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "50",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "Lead",
+          "allocation": "50",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3fr7r9fgxog",
+          "role": "Lead",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8nprm29ijw",
+      "name": "SMASDD Staff 02",
+      "title": "Senior SRS",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "70",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "30",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8r8dridw60",
+      "name": "SMASDD Staff 03",
+      "title": "Senior SRS",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "Co-Lead",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8st4y4nphv",
+      "name": "SMASDD Staff 04",
+      "title": "SRS-2",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8tdlet66eb",
+      "name": "SMASDD Staff 05",
+      "title": "SRS-1",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8u3z6c4k99",
+      "name": "SMASDD Staff 06",
+      "title": "SRS-1",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts8zicc5l4f5",
+      "name": "SPCSDD Staff 03",
+      "title": "Senior SRS",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "10",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "90",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts90xzyjfvfb",
+      "name": "SPCSDD Staff 04",
+      "title": "Senior SRS",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "60",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "40",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts930t2i2djb",
+      "name": "SPCSDD Staff 05",
+      "title": "SRS-2",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "70",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "30",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts93qw9ifhs0",
+      "name": "SPCSDD Staff 06",
+      "title": "SRS-2",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts94ljlqaxtl",
+      "name": "(Unfilled)",
+      "title": "SRS-1",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": true
+    },
+    {
+      "id": "pmts96670u7yi9",
+      "name": "SPCSDD Staff 07",
+      "title": "SRS-1",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "30",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "",
+          "allocation": "70",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3fr7r9fgxog",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts984mo7m308",
+      "name": "SMASDD Staff 07",
+      "title": "PTS-5",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts99hez62kiq",
+      "name": "SECSDD Staff 07",
+      "title": "PTS-IV",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "60",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "40",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3fjrec7qxgm",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts9aah9zsb99",
+      "name": "SPCSDD Staff 08",
+      "title": "PTS-4",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmts9bwe118hva",
+      "name": "SECSDD Staff 08",
+      "title": "PTS-1",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "70",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "",
+          "allocation": "30",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmu3frpwd5ndeo",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdo3y8giw3s",
+      "name": "SMASDD Staff 08",
+      "title": "PTS-1",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdpk8lhphwb",
+      "name": "SPCSDD Staff 09",
+      "title": "CIP Graduate Fellow",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdqhvbw69sx",
+      "name": "SECSDD Staff 09",
+      "title": "PTS-4",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdtl7mqwtts",
+      "name": "SPCSDD Staff 10",
+      "title": "PTS-3",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdvyvk3vlvb",
+      "name": "SPCSDD Staff 11",
+      "title": "PTS-3",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdx14m9is6n",
+      "name": "SPCSDD Staff 12",
+      "title": "PTS-1",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmttdxwq4xvoqo",
+      "name": "SPCSDD Staff 13",
+      "title": "PTA-4",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8q0ega4txq",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtte1mvoq8jct",
+      "name": "(Unfilled)",
+      "title": "SRS-2",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [],
+      "vacant": true
+    },
+    {
+      "id": "pmtte25tco50n9",
+      "name": "(Unfilled)",
+      "title": "SRS-1",
+      "dept": "SECSDD",
+      "managerId": "pmtqyzdzrveely",
+      "teams": [],
+      "vacant": true
+    },
+    {
+      "id": "pmtte4yxipisx1",
+      "name": "(Unfilled)",
+      "title": "SRS-2",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": true
+    },
+    {
+      "id": "pmttguxxazb6dk",
+      "name": "(Unfilled COS)",
+      "title": "PTS-1",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": true
+    },
+    {
+      "id": "pmttgvm8jik1gs",
+      "name": "(Unfilled COS)",
+      "title": "PTS-1",
+      "dept": "SPCSDD",
+      "managerId": "pmtqyytw8ltefp",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8pcpqjzwkr",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": true
+    },
+    {
+      "id": "pmtuueytwx4b9c",
+      "name": "SMASDD Staff 09",
+      "title": "PTS-4",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "80",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8ovsku8qa5",
+          "role": "",
+          "allocation": "100",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtuvnp05wj648",
+      "name": "Deputy Director General, SOII",
+      "title": "Deputy Director General",
+      "dept": "SOII",
+      "managerId": "pmtqtfuvv02etb",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtuvpqtzlk1yy",
+      "name": "Office of the DG Staff 01",
+      "title": "Head Executive Assistant",
+      "dept": "Office of the DG",
+      "managerId": "ps5f6jqb2jb",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "ps5f6jqb2jb",
+      "name": "(Hidden anchor — DDG-level)",
+      "title": "",
+      "dept": "",
+      "managerId": "pmtqtfuvv02etb",
+      "teams": [],
+      "vacant": false,
+      "hidden": true
+    },
+    {
+      "id": "pmtuxq7bjwhv37",
+      "name": "Chief, PPMD",
+      "title": "Chief",
+      "dept": "PPMD",
+      "managerId": "pmtuvpqtzlk1yy",
+      "teams": [],
+      "vacant": true
+    },
+    {
+      "id": "pmtuxrap8ireai",
+      "name": "PPMD Staff 01",
+      "title": "Planning Officer IV",
+      "dept": "PPMD",
+      "managerId": "pmtuxq7bjwhv37",
+      "teams": [
+        {
+          "teamId": "pmts8vxc3azp3r",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtuxs6f4n2ev6",
+      "name": "PPMD Staff 02",
+      "title": "Planning Officer III",
+      "dept": "PPMD",
+      "managerId": "pmtuxq7bjwhv37",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Assistant Project Manager",
+          "allocation": "",
+          "type": "solid",
+          "crossFunctional": true
+        },
+        {
+          "teamId": "pmts8qj1p2wcfz",
+          "role": "Project Manager",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtuxso0nh05ha",
+      "name": "PPMD Staff 03",
+      "title": "PO-I",
+      "dept": "PPMD",
+      "managerId": "pmtuxq7bjwhv37",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Project Manager",
+          "allocation": "",
+          "type": "solid",
+          "crossFunctional": true
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtuxswa5mbk0f",
+      "name": "PPMD Staff 04",
+      "title": "PO-1",
+      "dept": "PPMD",
+      "managerId": "pmtuxq7bjwhv37",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Assistant Project Manager",
+          "allocation": "",
+          "type": "solid",
+          "crossFunctional": true
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmtwlr1oqmxodt",
+      "name": "Director, SIIB",
+      "title": "Director IV",
+      "dept": "SIIB",
+      "managerId": "pmtuvnp05wj648",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtwlrlx6h0t8w",
+      "name": "Chief, SMCOD",
+      "title": "Chief",
+      "dept": "SMCOD",
+      "managerId": "pmtwlr1oqmxodt",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmtwls1r0a211h",
+      "name": "SMCOD Staff 01",
+      "title": "SvSRS",
+      "dept": "SMCOD",
+      "managerId": "pmtwlrlx6h0t8w",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmtqz1b1om6ckx",
+          "role": "",
+          "allocation": "20",
+          "type": "solid"
+        },
+        {
+          "teamId": "pmts8vxc3azp3r",
+          "role": "",
+          "allocation": "",
+          "type": "solid"
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmu3dw368i2j33",
+      "name": "Director, FAS",
+      "title": "Director IV",
+      "dept": "FAS",
+      "managerId": "pmtuvnp05wj648",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmu3dysqkktkbx",
+      "name": "Chief, FD",
+      "title": "Chief",
+      "dept": "FD",
+      "managerId": "pmu3dw368i2j33",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmu3dzf5syyb5w",
+      "name": "FD Staff 01",
+      "title": "SvAO",
+      "dept": "FD",
+      "managerId": "pmu3dysqkktkbx",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "",
+          "allocation": "",
+          "type": "solid",
+          "crossFunctional": true
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmu3e2vilws7vf",
+      "name": "Director, SSMB",
+      "title": "Director IV",
+      "dept": "SSMB",
+      "managerId": "pmtqtgor3qr0qd",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmu3e3mxpyjisu",
+      "name": "Chief, PRID",
+      "title": "Chief",
+      "dept": "PRID",
+      "managerId": "pmu3e2vilws7vf",
+      "teams": [],
+      "vacant": false
+    },
+    {
+      "id": "pmu3e4512kh7xo",
+      "name": "PRID Staff 01",
+      "title": "IO-4",
+      "dept": "PRID",
+      "managerId": "pmu3e3mxpyjisu",
+      "teams": [
+        {
+          "teamId": "pmtqyjbnsc1y4k",
+          "role": "Public Relations Officer",
+          "allocation": "",
+          "type": "solid",
+          "crossFunctional": true
+        }
+      ],
+      "vacant": false
+    },
+    {
+      "id": "pmu4tnpl526ygj",
+      "name": "(Unfilled)",
+      "title": "SvSRS",
+      "dept": "SMASDD",
+      "managerId": "pmtqz052lhkfc1",
+      "teams": [],
+      "vacant": true
+    }
+  ],
+  "teams": [
+    {
+      "id": "pmtqyjbnsc1y4k",
+      "name": "STRONG",
+      "leadIds": [
+        "pmtqtgor3qr0qd"
+      ],
+      "purpose": "",
+      "parentTeamId": null,
+      "color": "#2F6F5E"
+    },
+    {
+      "id": "pmtqz1b1om6ckx",
+      "name": "MULA Constellation",
+      "leadIds": [
+        "pmtqyzdzrveely"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqyjbnsc1y4k",
+      "color": "#6FA290"
+    },
+    {
+      "id": "pmts8ovsku8qa5",
+      "name": "AIT Facility and Operations",
+      "leadIds": [
+        "pmtqz052lhkfc1"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqyjbnsc1y4k",
+      "color": "#2F6F5E"
+    },
+    {
+      "id": "pmts8pcpqjzwkr",
+      "name": "MAYA-7",
+      "leadIds": [
+        "pmts699biymigv"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqyjbnsc1y4k",
+      "color": "#2F6F5E"
+    },
+    {
+      "id": "pmts8q0ega4txq",
+      "name": "Parts Qualification and Standards",
+      "leadIds": [
+        "pmts8kwmslzeox"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqyjbnsc1y4k",
+      "color": "#2F6F5E"
+    },
+    {
+      "id": "pmts8qj1p2wcfz",
+      "name": "SIKLAB",
+      "leadIds": [
+        "pmts8r8dridw60",
+        "pmtr08pysl6bq4"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqyjbnsc1y4k",
+      "color": "#2F6F5E"
+    },
+    {
+      "id": "pmts8vxc3azp3r",
+      "name": "Telco Sat",
+      "leadIds": [
+        "pmtqywt3j6exw3"
+      ],
+      "purpose": "",
+      "parentTeamId": null,
+      "color": "#7A5C99"
+    },
+    {
+      "id": "pmu3fjrec7qxgm",
+      "name": "Mech",
+      "leadIds": [
+        "pmts66bsjexo3b"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqz1b1om6ckx",
+      "color": "#6FA290"
+    },
+    {
+      "id": "pmu3fr7r9fgxog",
+      "name": "Opt",
+      "leadIds": [
+        "pmts8kwmslzeox"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqz1b1om6ckx",
+      "color": "#6FA290"
+    },
+    {
+      "id": "pmu3frpwd5ndeo",
+      "name": "OBDH",
+      "leadIds": [
+        "pmtr087i0o5ksh"
+      ],
+      "purpose": "",
+      "parentTeamId": "pmtqz1b1om6ckx",
+      "color": "#6FA290"
+    }
+  ],
+  "savedAt": "2026-09-29T00:00:00.000Z"
+}

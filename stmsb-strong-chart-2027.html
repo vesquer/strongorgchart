@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhilSA-STRONG Chart 2027</title>
+<link rel="stylesheet" href="stmsb-strong-chart-2027.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>PhilSA-STRONG Chart 2027</h1>
+    <span class="headcount" id="headcount">0 people</span>
+    <span class="headcount" id="teamcount" style="display:none;">0 teams</span>
+  </div>
+  <div class="view-tabs">
+    <button class="view-tab active" data-view="tree">PhilSA</button>
+    <button class="view-tab" data-view="matrix">Matrix</button>
+    <button class="view-tab" data-view="strongtree">STRONG</button>
+    <button class="view-tab" data-view="mulatree">MULA</button>
+  </div>
+  <div class="zoom-group" id="zoomGroup">
+    <button id="zoomOut" title="Zoom out">–</button>
+    <span class="zoom-label" id="zoomLabel">100%</span>
+    <button id="zoomIn" title="Zoom in">+</button>
+    <button id="zoomFit" title="Fit to screen" style="font-size:11px;">Fit</button>
+  </div>
+  <button class="btn" id="manageTeamsBtn">Manage teams</button>
+  <button class="btn" id="openImport">Import / export</button>
+  <button class="btn btn-save" id="saveDownloadBtn" title="Download the current chart as JSON">💾 Save</button>
+  <button class="btn btn-primary" id="addPersonBtn">+ Add person</button>
+  <div class="spacer"></div>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="Find a person or title">
+  </div>
+  <select id="overlayTeamSelect"><option value="">Highlight team…</option></select>
+</header>
+
+<div class="legend" id="legend" style="display:none;"></div>
+
+<div class="viewport" id="viewport">
+  <div class="empty-state" id="emptyState">
+    <h2>Nothing charted yet</h2>
+    <p>Add the first person to start the chart — usually whoever sits at the top — or paste a list of names, titles and managers to build it in one go.</p>
+    <div class="empty-actions">
+      <button class="btn btn-primary" id="emptyAddBtn">+ Add first person</button>
+      <button class="btn" id="emptyImportBtn">Paste a list</button>
+    </div>
+  </div>
+  <div class="stage-spacer" id="stageSpacer" style="display:none;">
+    <div class="stage" id="stage">
+      <svg class="connectors" id="connectors"></svg>
+      <div id="cardsLayer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="matrix-wrap" id="matrixWrap"></div>
+
+<div class="strong-tree-wrap" id="strongTreeWrap" style="display:none;"></div>
+
+<div class="strong-tree-wrap" id="mulaTreeWrap" style="display:none;"></div>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Person drawer -->
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawerTitle">Add person</h3>
+    <button class="drawer-close" id="drawerClose" aria-label="Close">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="field">
+      <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" placeholder="e.g. Jordan Reyes">
+      <div class="field-error" id="nameError" style="display:none;">Enter a name to continue.</div>
+    </div>
+    <div class="field">
+      <label for="titleInput">Title</label>
+      <input type="text" id="titleInput" placeholder="e.g. Systems Engineer">
+    </div>
+    <div class="field">
+      <label for="deptInput">Home department or function (optional)</label>
+      <div class="dept-row">
+        <span class="dept-dot" id="deptDot"></span>
+        <input type="text" id="deptInput" placeholder="e.g. Engineering" list="deptList">
+      </div>
+      <datalist id="deptList"></datalist>
+    </div>
+    <div class="field">
+      <label for="managerInput">Reports to (admin line)</label>
+      <select id="managerInput"></select>
+    </div>
+    <div class="reports-note" id="reportsNote" style="display:none;"></div>
+    <label class="vacant-check"><input type="checkbox" id="vacantInput"> This position is currently unfilled (shows gray on the chart)</label>
+    <hr class="divider">
+    <div class="field">
+      <label>Cross-functional teams</label>
+      <div id="personTeamsList"></div>
+      <div class="alloc-total" id="allocTotalNote" style="display:none;"></div>
+    </div>
+    <div class="delete-confirm" id="deleteConfirm" style="display:none;">
+      <span id="deleteConfirmText"></span>
+      <div class="row">
+        <button class="btn" id="deleteCancel">Cancel</button>
+        <button class="btn" id="deleteConfirmBtn" style="background:var(--danger); color:#fff; border-color:var(--danger);">Yes, remove</button>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-primary" id="saveBtn">Save</button>
+    <button class="btn" id="cancelBtn">Cancel</button>
+    <div style="flex:1;"></div>
+    <button class="btn" id="deleteBtn" style="display:none; color:var(--danger); border-color:#E3B7AA;">Remove</button>
+  </div>
+</div>
+
+<!-- Teams management modal -->
+<div class="modal" id="teamsModal">
+  <div class="modal-head">
+    <h3>Teams</h3>
+    <button class="drawer-close" id="teamsModalClose" aria-label="Close">×</button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h4>Existing teams</h4>
+      <div id="teamsList"></div>
+    </div>
+    <hr class="divider">
+    <div>
+      <h4 id="teamFormTitle">Add a team</h4>
+      <div class="field" style="margin-bottom:10px;"><label>Name</label><input id="teamNameInput" type="text" placeholder="e.g. Rebuild taskforce"></div>
+      <div class="field" style="margin-bottom:10px;"><label>Lead(s)</label><div id="teamLeadInput" class="lead-picker-list"></div><p class="hint" style="margin:6px 0 0;">Check everyone who leads this team — a team can have more than one lead (co-leadership).</p></div>
+      <div class="field" style="margin-bottom:10px;"><label>Subproject of (optional)</label><select id="teamParentInput"></select><p class="hint" style="margin:6px 0 0;">A subproject's allocation is a slice of its parent's — someone at 80% on the parent and 70% on this subproject is 70% of that 80%, not 80% + 70%. Subprojects don't add to the overall-capacity total.</p></div>
+      <div class="field" style="margin-bottom:10px;"><label>Purpose (optional)</label><input id="teamPurposeInput" type="text" placeholder="What this team exists to do"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary" id="saveTeamBtn">Save team</button>
+        <button class="btn" id="cancelTeamEditBtn" style="display:none;">Cancel edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Import / export modal -->
+<div class="modal" id="importModal">
+  <div class="modal-head">
+    <h3>Import / export</h3>
+    <button class="drawer-close" id="modalClose" aria-label="Close">×</button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h4>Upload a JSON file</h4>
+      <p class="hint">Upload a file exported from here (people and teams together) to add or update from it. People and teams are matched by ID, so uploading a file you exported earlier updates existing entries instead of duplicating them.</p>
+      <input type="file" id="jsonFileInput" accept="application/json,.json" style="display:none;">
+      <button class="btn" id="jsonUploadBtn">Choose file…</button>
+      <span class="import-status" id="jsonUploadStatus"></span>
+    </div>
+    <hr class="divider">
+    <div>
+      <h4>Add people from a pasted list</h4>
+      <p class="hint">One person per line: <strong>Name, Title, Manager's name</strong>. Leave the manager blank for someone at the top. This only sets up the reporting line — add team memberships afterward from each person's card.</p>
+      <textarea id="importText" placeholder="Alex Rivera, Chief Engineer,&#10;Sam Cruz, Deputy Chief, Alex Rivera&#10;Jamie Lee, Power Systems Lead, Sam Cruz"></textarea>
+      <div style="margin-top:8px;"><button class="btn btn-primary" id="runImport">Add these people</button><span class="import-status" id="importStatus"></span></div>
+    </div>
+    <hr class="divider">
+    <div>
+      <h4>Export current chart</h4>
+      <p class="hint">Includes people, reporting lines, and teams. Copy this or download it to back up or share the chart.</p>
+      <textarea id="exportText" readonly></textarea>
+      <div style="margin-top:8px; display:flex; gap:8px;">
+        <button class="btn" id="copyExport">Copy</button>
+        <button class="btn" id="downloadExport">Download .json</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="stmsb-strong-chart-2027.js"></script>
+</body>
+</html>
