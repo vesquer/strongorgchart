@@ -19,6 +19,7 @@
     <button class="view-tab" data-view="matrix">Matrix</button>
     <button class="view-tab" data-view="strongtree">STRONG</button>
     <button class="view-tab" data-view="mulatree">MULA</button>
+    <button class="view-tab" data-view="srrtree" title="2026 project — kept separate from the 2027 programs">SRR</button>
   </div>
   <div class="zoom-group" id="zoomGroup">
     <button id="zoomOut" title="Zoom out">–</button>
@@ -62,6 +63,8 @@
 <div class="strong-tree-wrap" id="strongTreeWrap" style="display:none;"></div>
 
 <div class="strong-tree-wrap" id="mulaTreeWrap" style="display:none;"></div>
+
+<div class="strong-tree-wrap" id="srrTreeWrap" style="display:none;"></div>
 
 <div class="overlay" id="overlay"></div>
 
@@ -135,6 +138,7 @@
       <div class="field" style="margin-bottom:10px;"><label>Lead(s)</label><div id="teamLeadInput" class="lead-picker-list"></div><p class="hint" style="margin:6px 0 0;">Check everyone who leads this team — a team can have more than one lead (co-leadership).</p></div>
       <div class="field" style="margin-bottom:10px;"><label>Subproject of (optional)</label><select id="teamParentInput"></select><p class="hint" style="margin:6px 0 0;">A subproject's allocation is a slice of its parent's — someone at 80% on the parent and 70% on this subproject is 70% of that 80%, not 80% + 70%. Subprojects don't add to the overall-capacity total.</p></div>
       <div class="field" style="margin-bottom:10px;"><label>Purpose (optional)</label><input id="teamPurposeInput" type="text" placeholder="What this team exists to do"></div>
+      <label class="vacant-check" style="margin-bottom:10px;"><input type="checkbox" id="teamSeparateInput"> Separate 2026 project — not counted with the 2027 programs (left out of allocation totals and the STRONG tab)</label>
       <div style="display:flex; gap:8px;">
         <button class="btn btn-primary" id="saveTeamBtn">Save team</button>
         <button class="btn" id="cancelTeamEditBtn" style="display:none;">Cancel edit</button>

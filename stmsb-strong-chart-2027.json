@@ -1391,6 +1391,15 @@
       "purpose": "",
       "parentTeamId": "pmtqz1b1om6ckx",
       "color": "#6FA290"
+    },
+    {
+      "id": "srr2026",
+      "name": "SRR",
+      "leadIds": [],
+      "purpose": "2026 project — separate from the 2027 programs",
+      "parentTeamId": null,
+      "color": "#A65B3F",
+      "separate": true
     }
   ],
   "savedAt": "2026-09-29T00:00:00.000Z"

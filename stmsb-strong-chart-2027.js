@@ -1427,6 +1427,15 @@
         "purpose": "",
         "parentTeamId": "pmtqz1b1om6ckx",
         "color": "#6FA290"
+      },
+      {
+        "id": "srr2026",
+        "name": "SRR",
+        "leadIds": [],
+        "purpose": "2026 project — separate from the 2027 programs",
+        "parentTeamId": null,
+        "color": "#A65B3F",
+        "separate": true
       }
     ],
     "savedAt": "2026-09-29T00:00:00.000Z"
@@ -1440,7 +1449,7 @@
     search: "",
     // Zoom is tracked per view, so zooming the Matrix doesn't shrink the
     // tree and vice versa — each tab keeps whatever level it was left at.
-    zooms: { tree: 1, matrix: 1, strongtree: 1, mulatree: 1 },
+    zooms: { tree: 1, matrix: 1, strongtree: 1, mulatree: 1, srrtree: 1 },
     editingId: null,
     editingTeamId: null,
     dimDept: null,
@@ -1452,7 +1461,7 @@
   // Each view snaps to "fit width" the first time it is shown, and not again
   // after that — render() runs on every edit, and re-fitting there would yank
   // the zoom out from under anyone who set it by hand.
-  var didFitView = { tree: false, matrix: false, strongtree: false, mulatree: false };
+  var didFitView = { tree: false, matrix: false, strongtree: false, mulatree: false, srrtree: false };
   // A view lands here once its +/- buttons have been used, so a window resize
   // leaves a zoom the user chose deliberately alone.
   var zoomTouched = {};
@@ -1472,6 +1481,7 @@
     var leadIds = Array.isArray(t.leadIds) ? t.leadIds.slice() : (t.leadId ? [t.leadId] : []);
     var out = { id: t.id, name: t.name, leadIds: leadIds, purpose: t.purpose || '', parentTeamId: t.parentTeamId || null };
     if (t.color) out.color = t.color;
+    if (t.separate) out.separate = true;
     return out;
   }
   function normalizeLoaded(json){
@@ -1510,6 +1520,7 @@
     // Bring localStorage up to date with whichever source just won, so the
     // next load starts from here instead of re-comparing stale data.
     try{ localStorage.setItem(LOCAL_KEY, JSON.stringify({ people: state.people, teams: state.teams, savedAt: state.savedAt })); }catch(e){}
+    ensureSrrTeam();
     ensureTeamLeadMemberships();
     refreshOverlaySelect();
     // Fresh data can change how wide things are, so let each view fit once
@@ -1608,13 +1619,38 @@
   // total. A subproject's allocation is a slice of its parent's (e.g. 70%
   // MULA inside an 80% STRONG commitment), not additional load on top of it,
   // so it's shown for reference but excluded here to avoid double-counting.
+  // SRR is a 2026 project, so it never overlaps in time with the programs
+  // that start in 2027 — a separate team (or anything under one) is left out
+  // of the capacity total instead of being stacked on top of 2027 work.
   function allocationTotal(p){
     return (p.teams||[]).reduce(function(sum,t){
       var team = teamById(t.teamId);
       if (team && team.parentTeamId) return sum;
+      if (team && isSeparateTeam(team)) return sum;
       var n = parseFloat(t.allocation);
       return sum + (isNaN(n)?0:n);
     }, 0);
+  }
+  // A "separate" team is a standalone project on its own timeline (SRR, 2026).
+  // Its subprojects inherit that, however deep they sit.
+  function isSeparateTeam(t){
+    var guard = 0;
+    while (t && guard++ < 50){
+      if (t.separate) return true;
+      t = t.parentTeamId ? teamById(t.parentTeamId) : null;
+    }
+    return false;
+  }
+  // The SRR tab needs an "SRR" team to draw. Older saves (this browser's
+  // localStorage, or a JSON exported before SRR existed) won't have one, so
+  // it's added here on load if missing — matched by name, so renaming or
+  // re-creating it by hand still works.
+  var SRR_TEAM_NAME = 'SRR';
+  function srrTeam(){ return state.teams.find(function(t){ return t.name === SRR_TEAM_NAME; }); }
+  function ensureSrrTeam(){
+    var t = srrTeam();
+    if (t){ t.separate = true; return; }
+    state.teams.push({ id: 'srr2026', name: SRR_TEAM_NAME, leadIds: [], purpose: '2026 project — separate from the 2027 programs', parentTeamId: null, color: '#A65B3F', separate: true });
   }
   function ensureTeamLeadMemberships(){
     state.teams.forEach(function(team){
@@ -1874,6 +1910,7 @@
     renderMatrix();
     renderStrongTree();
     renderMulaTree();
+    renderSrrTree();
     applyViewZoom();
   }
 
@@ -2125,11 +2162,11 @@
       var parent = t.parentTeamId ? teamById(t.parentTeamId) : null;
       html += '<th class="' + (parent ? 'subproject-col' : '') + '" style="border-top:3px solid ' + teamColor(t) + '">' +
         (parent ? '<div class="subproject-of">↳ of ' + escapeHtml(parent.name) + '</div>' : '') +
-        escapeHtml(t.name) +
+        escapeHtml(t.name) + (isSeparateTeam(t) ? '<span class="period-badge">2026</span>' : '') +
         (leads.length ? '<div class="th-sub">' + (leads.length > 1 ? 'Leads: ' : 'Lead: ') + leads.map(function(l){ return escapeHtml(l.name); }).join(', ') + '</div>' : '<div class="th-sub th-warn">No lead set</div>') +
         '</th>';
     });
-    html += '<th class="sticky-col-right">Total<div class="th-sub">top-level only</div></th></tr></thead><tbody>';
+    html += '<th class="sticky-col-right">Total<div class="th-sub">top-level, 2027</div></th></tr></thead><tbody>';
 
     if (!rows.length){
       html += '<tr><td colspan="' + (teams.length+2) + '" style="text-align:center; color:var(--ink-soft);">No one matches that search.</td></tr>';
@@ -2165,7 +2202,7 @@
   function renderStrongTree(){
     var wrap = document.getElementById('strongTreeWrap');
     var programs = state.teams.filter(function(t){
-      return !t.parentTeamId && state.teams.some(function(c){ return c.parentTeamId === t.id; });
+      return !t.parentTeamId && !isSeparateTeam(t) && state.teams.some(function(c){ return c.parentTeamId === t.id; });
     });
     if (!programs.length){
       wrap.innerHTML = '<div class="matrix-empty-wrap"><div class="empty-state" style="position:static;"><h2>No subprojects yet</h2><p>In "Manage teams", set a team&rsquo;s "Subproject of" to another team to see that breakdown here.</p></div></div>';
@@ -2187,6 +2224,23 @@
       return;
     }
     wrap.innerHTML = '<div class="stx-scroll"><div class="stx-programs">' + renderProgramTree(mula) + '</div></div>';
+  }
+
+  // The SRR tab: same program-tree drawing, rooted at the "SRR" team. SRR is a
+  // 2026 project that doesn't share time with the 2027 programs, so nothing
+  // here feeds the STRONG tab or the 2027 allocation totals, and SRR never
+  // shows up in an "Also on" line over there (those only list teams within
+  // the same program).
+  function renderSrrTree(){
+    var wrap = document.getElementById('srrTreeWrap');
+    var srr = srrTeam();
+    if (!srr){
+      wrap.innerHTML = '<div class="matrix-empty-wrap"><div class="empty-state" style="position:static;"><h2>No "SRR" team found</h2><p>This tab looks for a team named exactly "SRR" in "Manage teams".</p></div></div>';
+      return;
+    }
+    wrap.innerHTML = '<div class="stx-scroll"><div class="stx-programs">' +
+      '<div class="stx-period-note">2026 project &middot; runs on its own timeline, so allocations here are not added to anyone&rsquo;s 2027 total.</div>' +
+      renderProgramTree(srr) + '</div></div>';
   }
 
   function stxMembersOf(teamId){
@@ -2317,11 +2371,14 @@
     return (
       '<div class="stx-program">' +
         stxNode(root, allTeamIds, 'stx-root', childIds, root.id) +
+        // No subprojects and no cross-functional box (e.g. SRR before it's
+        // broken down) — just the root box, with no dangling trunk line.
+        ((children.length || xfnMembers.length) ?
         '<div class="stx-trunk"></div>' +
         '<div class="stx-children">' +
           children.map(function(c){ return '<div class="stx-child-wrap"><div class="stx-branch"></div>' + stxNode(c, allTeamIds, 'stx-child', null, root.id) + '</div>'; }).join('') +
           (xfnMembers.length ? '<div class="stx-child-wrap"><div class="stx-branch"></div>' + stxXfnBox(xfnMembers, root, allTeamIds, root.id) + '</div>' : '') +
-        '</div>' +
+        '</div>' : '') +
       '</div>'
     );
   }
@@ -2333,6 +2390,7 @@
     document.getElementById('matrixWrap').style.display = v === 'matrix' ? 'block' : 'none';
     document.getElementById('strongTreeWrap').style.display = v === 'strongtree' ? 'block' : 'none';
     document.getElementById('mulaTreeWrap').style.display = v === 'mulatree' ? 'block' : 'none';
+    document.getElementById('srrTreeWrap').style.display = v === 'srrtree' ? 'block' : 'none';
     document.querySelectorAll('.view-tab').forEach(function(btn){
       btn.classList.toggle('active', btn.getAttribute('data-view') === v);
     });
@@ -2380,10 +2438,11 @@
       var entry = memberships.find(function(m){ return m.teamId === t.id; });
       var checked = entry ? 'checked' : '';
       var isSub = !!t.parentTeamId;
-      return '<div class="team-row' + (isSub ? ' subproject' : '') + '" data-team="' + t.id + '">' +
+      var isSep = isSeparateTeam(t);
+      return '<div class="team-row' + (isSub ? ' subproject' : '') + (isSep ? ' separate' : '') + '" data-team="' + t.id + '">' +
         (isSub ? '<div class="team-sub-label">subproject</div>' : '') +
         '<label class="team-row-check"><input type="checkbox" data-team-check="' + t.id + '" ' + checked + '> ' +
-          '<span class="legend-dot" style="background:' + teamColor(t) + '"></span> ' + escapeHtml(t.name) +
+          '<span class="legend-dot" style="background:' + teamColor(t) + '"></span> ' + escapeHtml(t.name) + (isSep ? '<span class="period-badge">2026</span>' : '') +
         '</label>' +
         '<div class="team-row-fields" style="' + (entry ? '' : 'display:none;') + '">' +
           '<input type="text" placeholder="Role (e.g. Contributor)" data-team-role="' + t.id + '" value="' + escapeHtml(entry ? (entry.role||'') : '') + '">' +
@@ -2402,7 +2461,7 @@
   }
   function updateAllocNote(){
     var total = 0; // top-level teams only — a subproject's % is a slice of its parent's, not additional load
-    document.querySelectorAll('#personTeamsList .team-row:not(.subproject)').forEach(function(row){
+    document.querySelectorAll('#personTeamsList .team-row:not(.subproject):not(.separate)').forEach(function(row){
       var checkbox = row.querySelector('[data-team-check]');
       if (checkbox && checkbox.checked){
         var allocInput = row.querySelector('[data-team-alloc]');
@@ -2413,7 +2472,7 @@
     var note = document.getElementById('allocTotalNote');
     if (total > 0){
       note.style.display = 'block';
-      note.textContent = 'Total allocation across top-level teams: ' + total + '%' + (total > 100 ? ' — over capacity' : '');
+      note.textContent = 'Total 2027 allocation across top-level teams: ' + total + '%' + (total > 100 ? ' — over capacity' : '');
       note.className = 'alloc-total' + (total > 100 ? ' alloc-warn-text' : '');
     } else {
       note.style.display = 'none';
@@ -2562,7 +2621,7 @@
       return '<div class="team-list-row' + (parent ? ' subproject' : '') + '">' +
         '<span class="legend-dot" style="background:' + teamColor(t) + '"></span>' +
         '<div style="flex:1;">' + (parent ? '<div class="team-sub-label">subproject of ' + escapeHtml(parent.name) + '</div>' : '') +
-          '<strong>' + escapeHtml(t.name) + '</strong>' +
+          '<strong>' + escapeHtml(t.name) + '</strong>' + (isSeparateTeam(t) ? '<span class="period-badge">2026 · separate</span>' : '') +
           '<div class="th-sub">' + leadLabel + '</div>' +
           '<div class="th-sub">' + count + (count === 1 ? ' member' : ' members') + '</div>' +
         '</div>' +
@@ -2602,6 +2661,7 @@
     renderTeamLeadPicker([]);
     document.getElementById('teamParentInput').value = '';
     document.getElementById('teamPurposeInput').value = '';
+    document.getElementById('teamSeparateInput').checked = false;
     document.getElementById('cancelTeamEditBtn').style.display = 'none';
     populateTeamParentSelect(null);
   }
@@ -2621,16 +2681,20 @@
     var leadIds = collectTeamLeadIds();
     var parentTeamId = document.getElementById('teamParentInput').value || null;
     var purpose = document.getElementById('teamPurposeInput').value.trim();
+    var separate = document.getElementById('teamSeparateInput').checked;
     if (state.editingTeamId){
       var t = teamById(state.editingTeamId);
       t.name = name; t.leadIds = leadIds; t.purpose = purpose; t.parentTeamId = parentTeamId;
+      if (separate) t.separate = true; else delete t.separate;
     } else {
       var color = PALETTE[state.teams.length % PALETTE.length];
       if (parentTeamId){
         var p2 = teamById(parentTeamId);
         if (p2 && p2.color) color = p2.color;
       }
-      state.teams.push({ id: uid(), name: name, leadIds: leadIds, purpose: purpose, color: color, parentTeamId: parentTeamId });
+      var newTeam = { id: uid(), name: name, leadIds: leadIds, purpose: purpose, color: color, parentTeamId: parentTeamId };
+      if (separate) newTeam.separate = true;
+      state.teams.push(newTeam);
     }
     ensureTeamLeadMemberships();
     persist();
@@ -2647,6 +2711,7 @@
     document.getElementById('teamNameInput').value = t.name;
     renderTeamLeadPicker(t.leadIds || []);
     document.getElementById('teamPurposeInput').value = t.purpose || '';
+    document.getElementById('teamSeparateInput').checked = !!t.separate;
     populateTeamParentSelect(t.id);
     document.getElementById('teamParentInput').value = t.parentTeamId || '';
     document.getElementById('cancelTeamEditBtn').style.display = 'inline-flex';
@@ -2753,13 +2818,17 @@
             existing.name = t.name; existing.leadIds = incomingLeadIds; existing.purpose = t.purpose||'';
             existing.parentTeamId = t.parentTeamId||null;
             if (t.color) existing.color = t.color;
+            if (t.separate) existing.separate = true;
             updatedT++;
           } else {
-            state.teams.push({ id:t.id, name:t.name, leadIds: incomingLeadIds, purpose:t.purpose||'', color:t.color||PALETTE[state.teams.length % PALETTE.length], parentTeamId: t.parentTeamId||null });
+            var addedTeam = { id:t.id, name:t.name, leadIds: incomingLeadIds, purpose:t.purpose||'', color:t.color||PALETTE[state.teams.length % PALETTE.length], parentTeamId: t.parentTeamId||null };
+            if (t.separate) addedTeam.separate = true;
+            state.teams.push(addedTeam);
             addedT++;
           }
         });
 
+        ensureSrrTeam();
         ensureTeamLeadMemberships();
         persist();
         status.textContent = 'Added ' + addedP + ', updated ' + updatedP + ' people' +
@@ -2784,7 +2853,7 @@
 
   // ---------- zoom ----------
   // Every view is zoomable. The tree is drawn at absolute positions, so it
-  // scales with a transform on the stage. The Matrix, STRONG and MULA views
+  // scales with a transform on the stage. The Matrix, STRONG, MULA and SRR views
   // are ordinary flow layout, so they use CSS zoom instead — that reflows
   // rather than just painting smaller, which keeps the sticky table header
   // and the scrollbars honest.
@@ -2810,12 +2879,13 @@
     if (v === 'matrix') return { scroller: document.querySelector('#matrixWrap .matrix-scroll'), content: document.querySelector('#matrixWrap .matrix-table') };
     if (v === 'strongtree') return { scroller: document.querySelector('#strongTreeWrap .stx-scroll'), content: document.querySelector('#strongTreeWrap .stx-programs') };
     if (v === 'mulatree') return { scroller: document.querySelector('#mulaTreeWrap .stx-scroll'), content: document.querySelector('#mulaTreeWrap .stx-programs') };
+    if (v === 'srrtree') return { scroller: document.querySelector('#srrTreeWrap .stx-scroll'), content: document.querySelector('#srrTreeWrap .stx-programs') };
     return { scroller: document.getElementById('viewport'), content: document.getElementById('stage') };
   }
   // The flow-layout views are rebuilt from scratch on every render, so their
   // inline zoom has to be put back each time.
   function applyViewZoom(){
-    ['matrix','strongtree','mulatree'].forEach(function(v){
+    ['matrix','strongtree','mulatree','srrtree'].forEach(function(v){
       var t = zoomTargets(v);
       if (t.content) t.content.style.zoom = zoomOf(v);
     });
