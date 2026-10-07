@@ -2312,6 +2312,8 @@
     // renderProgramTree collects them once and draws a single shared box
     // alongside the subprojects instead (see stxAllCrossFunctional/stxXfnBox).
     members = stxSortMembers(members.filter(function(item){ return !item.entry.crossFunctional; }), team);
+    var leadMembers = members.filter(function(item){ return stxMemberRank(item, team) <= 1; });
+    var restMembers = members.filter(function(item){ return stxMemberRank(item, team) > 1; });
     var color = teamColor(team);
     return (
       '<div class="stx-node' + (extraClass ? ' ' + extraClass : '') + '" style="border-color:' + color + '; background:' + hexToTint(color) + ';">' +
@@ -2320,9 +2322,14 @@
           (leads.length ? '<div class="stx-node-lead">' + (leads.length > 1 ? 'Leads: ' : 'Lead: ') + leads.map(function(l){ return escapeHtml(l.name); }).join(', ') + '</div>' : '<div class="stx-node-lead stx-warn">No lead set</div>') +
         '</div>' +
         (team.purpose ? '<div class="stx-node-purpose">' + escapeHtml(team.purpose) + '</div>' : '') +
+        // Sponsors/leads get their own row above everyone else, so the lead
+        // sits on a separate level (most visible in the SRR tab's two-column
+        // box, where they'd otherwise share a row with a team member).
+        (leadMembers.length ? '<div class="stx-node-leads">' + leadMembers.map(function(m){ return stxMemberCard(m, team.id, allTeamIds, rootTeamId); }).join('') + '</div>' : '') +
+        (restMembers.length || !leadMembers.length ?
         '<div class="stx-node-members">' +
-          (members.length ? members.map(function(m){ return stxMemberCard(m, team.id, allTeamIds, rootTeamId); }).join('') : '<div class="stx-empty">No one assigned yet</div>') +
-        '</div>' +
+          (restMembers.length ? restMembers.map(function(m){ return stxMemberCard(m, team.id, allTeamIds, rootTeamId); }).join('') : '<div class="stx-empty">No one assigned yet</div>') +
+        '</div>' : '') +
       '</div>'
     );
   }

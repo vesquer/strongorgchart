@@ -441,3 +441,10 @@ textarea:focus{outline:2px solid var(--pine); outline-offset:1px;}
 /* SRR tab: the root box lists its people in two columns */
 #srrTreeWrap .stx-root{width:580px;}
 #srrTreeWrap .stx-root .stx-node-members{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:7px;}
+/* Leads/sponsors sit on their own row above the rest of a box's roster */
+.stx-node-leads{margin-top:10px; display:flex; flex-direction:column; gap:7px;}
+.stx-node-leads + .stx-node-members{margin-top:7px;}
+/* SRR: lead row centered at one column's width, divided from the two-column roster below */
+#srrTreeWrap .stx-root .stx-node-leads{flex-direction:row; flex-wrap:wrap; justify-content:center;}
+#srrTreeWrap .stx-root .stx-node-leads .stx-card{flex:0 0 calc(50% - 4px); min-width:0;}
+#srrTreeWrap .stx-root .stx-node-leads + .stx-node-members{margin-top:12px; padding-top:12px; border-top:1px dashed rgba(0,0,0,0.18);}
