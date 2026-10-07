@@ -2239,7 +2239,6 @@
       return;
     }
     wrap.innerHTML = '<div class="stx-scroll"><div class="stx-programs">' +
-      '<div class="stx-period-note">2026 project &middot; runs on its own timeline, so allocations here are not added to anyone&rsquo;s 2027 total.</div>' +
       renderProgramTree(srr) + '</div></div>';
   }
 
